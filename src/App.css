@@ -1,0 +1,261 @@
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: auto; /* We'll handle this with GSAP */
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0a0a0a;
+  color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  overflow: hidden;
+  line-height: 1.6;
+  position: relative;
+  overscroll-behavior: none;
+}
+
+/* Smooth Scroll Wrapper */
+#smooth-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#smooth-wrapper.dragging,
+#smooth-wrapper:active {
+  cursor: grabbing;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+/* Main Content */
+#smooth-content {
+  will-change: transform;
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Main Wrapper */
+.main-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  overscroll-behavior: none;
+  perspective: 1000px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+.main-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+  width: 0;
+  height: 0;
+}
+
+/* Disable text selection during drag */
+body.dragging {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Card Styles */
+.card {
+  width: 90%;
+  height: 65vh;
+  max-width: 1200px;
+  margin: 5vh auto;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+}
+
+.card h2 {
+  font-size: 4.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  font-family: 'Playfair Display', serif;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.card p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 2;
+  font-weight: 300;
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* Type Indicator */
+.type-indicator {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  z-index: 3;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+  backdrop-filter: blur(1px);
+  background-color: rgba(0, 0, 0, 0.2);
+  mix-blend-mode: difference;
+}
+
+.cursor-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  pointer-events: none;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+/* Hide default cursor */
+* {
+  cursor: auto;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .card h2 {
+    font-size: 3.5rem;
+  }
+  
+  .card p {
+    font-size: 1.1rem;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 95%;
+    height: 80vh;
+    margin: 10vh auto;
+  }
+  
+  .card h2 {
+    font-size: 2.5rem;
+  }
+  
+  .card p {
+    font-size: 1rem;
+  }
+  
+  .type-indicator {
+    top: 1.5rem;
+    left: 1.5rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Animation Classes */
+.animate-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-delay-1 {
+  transition-delay: 0.2s !important;
+}
+
+.animate-delay-2 {
+  transition-delay: 0.4s !important;
+}
