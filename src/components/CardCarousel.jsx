@@ -174,8 +174,7 @@ const CardCarousel = ({ item, index }) => {
         transformStyle: 'preserve-3d',
         backfaceVisibility: 'hidden',
         WebkitBackfaceVisibility: 'hidden',
-        WebkitTransformStyle: 'preserve-3d',
-        WebkitBackfaceVisibility: 'hidden'
+        WebkitTransformStyle: 'preserve-3d'
       }}
     >
       <div className="type-indicator">{item.type}</div>
