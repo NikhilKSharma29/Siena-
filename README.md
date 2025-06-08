@@ -14,14 +14,28 @@ A beautiful, responsive infinite scroll gallery with smooth animations and paral
 
 ### Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyourusername%2FSiena-card-carousel-effect&project-name=cinematic-gallery&repository-name=cinematic-gallery)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FNikhilKSharma29%2FSiena-&project-name=siena-gallery&repository-name=siena-gallery)
 
-1. Push your code to GitHub
-2. Sign in to [Vercel](https://vercel.com)
-3. Click "New Project"
-4. Import your repository
-5. Vercel will automatically detect the Vite + React setup
-6. Click "Deploy"
+1. Click the "Deploy" button above
+2. Sign in to your Vercel account (or create one if you don't have it)
+3. The project will be automatically configured with the correct settings
+4. Click "Deploy" and wait for the deployment to complete
+
+Or deploy manually:
+
+```bash
+# Clone the repository
+git clone https://github.com/NikhilKSharma29/Siena-.git
+cd Siena-
+
+# Install dependencies
+npm install
+
+# Run locally
+npm run dev
+```
+
+Then visit [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
 ### Netlify
 
