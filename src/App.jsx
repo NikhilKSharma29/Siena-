@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import CardCarousel from './components/CardCarousel';
 import Cursor from './components/Cursor';
+import ElasticScroll from './components/ElasticScroll';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -69,35 +70,49 @@ const App = () => {
 
   // Initialize ScrollSmoother
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     
-    if (typeof window !== 'undefined') {
-      
-      const initSmoother = setTimeout(() => {
+    // Ensure the DOM elements exist
+    const wrapper = document.querySelector('#smooth-wrapper');
+    const content = document.querySelector('#smooth-content');
+    if (!wrapper || !content) return;
+    
+    // Kill any existing smoother
+    if (smoother.current) {
+      smoother.current.kill();
+    }
+    
+    const initSmoother = () => {
+      try {
         smoother.current = ScrollSmoother.create({
           wrapper: '#smooth-wrapper',
           content: '#smooth-content',
-          smooth: 1.2, 
-          effects: true, 
-          smoothTouch: 0.1, 
-          normalizeScroll: true, 
-          ignoreMobileResize: true, 
+          smooth: 1.2,
+          effects: true,
+          smoothTouch: 0.1,
+          normalizeScroll: true,
+          ignoreMobileResize: true,
         });
-
         
         if (smoother.current) {
-          const cardHeight = window.innerHeight * 0.8; 
+          const cardHeight = window.innerHeight * 0.8;
           const startScroll = cardHeight * startIndex;
           smoother.current.scrollTo(startScroll, true, 'top top');
         }
-      }, 100);
+      } catch (error) {
+        console.error('ScrollSmoother initialization error:', error);
+      }
+    };
+    
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(initSmoother, 100);
 
-      return () => {
-        clearTimeout(initSmoother);
-        if (smoother.current) {
-          smoother.current.kill();
-        }
-      };
-    }
+    return () => {
+      clearTimeout(timer);
+      if (smoother.current) {
+        smoother.current.kill();
+      }
+    };
   }, []);
 
   // Duplicate items for infinite scroll krne k liye
@@ -286,13 +301,18 @@ const App = () => {
     <div className="App">
       <Cursor />
       <div id="smooth-wrapper">
-        <div 
-          id="smooth-content"
-          className="main-wrapper"
-        >
-          {items.map((item, index) => (
-            <CardCarousel key={`${item.title}-${index}`} item={item} index={index} />
-          ))}
+        <div id="smooth-content">
+          <ElasticScroll 
+            className="main-wrapper"
+            wrapperRef={contentRef}
+            strength={0.4}
+            maxGap={80}
+            minGap={40}
+          >
+            {items.map((item, index) => (
+              <CardCarousel key={`${item.title}-${index}`} item={item} index={index} />
+            ))}
+          </ElasticScroll>
         </div>
       </div>
     </div>
