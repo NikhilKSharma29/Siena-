@@ -21,31 +21,31 @@ const data = [
     title: "The Batman",
     desc: "An epic noir journey through the lens of cinematic chaos.",
     type:"Superhero",
-    image: "../public/Batman.jpeg"
+    image: "/Batman.jpeg"
   },
   {
     title: "John Wick",
     desc: "Psychoanalysis reimagined in the shadow of rebellion.",
     type:"thriller",
-    image: "../public/johnwick.jpg"
+    image: "/johnwick.jpg"
   },
   {
     title: "Sherlock Holmes",
     desc: "A poetic space odyssey floating between reality and dream.",
     type:"documentary",
-    image: "../public/sherlock.jpg"
+    image: "/sherlock.jpg"
   },
   {
     title: "Peaky Blinders",
     desc: "A poetic space odyssey floating between reality and dream.",
     type  :"documentary",
-    image: "../public/peakyblinder.jpg"
+    image: "/peakyblinder.jpg"
   },
   {
     title: "Game of Thrones",
     desc: "A poetic space odyssey floating between reality and dream.",
     type:"Science Fiction",
-    image: "../public/got.jpg"
+    image: "/got.jpg"
   },
 ];
 
